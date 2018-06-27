@@ -1,0 +1,12 @@
+h1 {
+    color: red;
+}
+
+#wrapper {
+    width: 960px;
+    margin: 0 auto;
+}
+
+#train-input-css {
+    margin-top: 32px;
+}
