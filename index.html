@@ -66,8 +66,8 @@
                                       <input type="text" class="form-control" id="train-name" aria-describedby="trainName" placeholder="Input The Train Company Name">
                                     </div>
                                     <div class="form-group">
-                                            <label for="desintation">Destination:</label>
-                                            <input type="text" class="form-control" id="desintation" aria-describedby="destinationName" placeholder="Choose Your Destination">
+                                            <label for="destination">Destination:</label>
+                                            <input type="text" class="form-control" id="destination" aria-describedby="destinationName" placeholder="Choose Your Destination">
                                     </div>
                                     <div class="form-group">
                                             <label for="first-train-time">First Train Time (HH:mm - military time):</label>
@@ -77,20 +77,20 @@
                                             <label for="frequency">Frequency (min):</label>
                                             <input type="text" class="form-control" id="frequency" aria-describedby="frequencyMin" placeholder="How often does the train arrive in minutes?">
                                     </div>
-                                    <button type="submit" class="btn btn-secondary">Search</button>
+                                    <button type="submit" id="train-btn" class="btn btn-secondary">Search</button>
                                   </form>
                     </div>
                   </div>
 
 
     </div>
-
+   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+     <!--Firebase-->
+     <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
     <!-- My JavaScript -->
     <script src="assets/js/main.js"></script>
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <!--Firebase-->
-    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+ 
     <!--Bootstrap-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
