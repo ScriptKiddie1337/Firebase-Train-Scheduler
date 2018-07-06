@@ -11,48 +11,69 @@
 
   var database = firebase.database();
 
+  var trainData = database.ref();
+
   var trainName = [];
   var destination = [];
-  var frequencyMins = [];
+  var frequency = [];
   var nextArrival = [];
   var minutesAway = 0;//minutesCalculated;
 
-  database.ref().on("value", function(snapshot) {
+  database.ref().on("child_added", function(snapshot) {
+    let data = snapshot.val();
+    //gives local current time
+  let currentTime = moment().format("hh:mm A");
+  console.log("currentTime:", currentTime);
+    // To calculate the arrival time, add the tMinutes to the currrent time
+/*          let tFrequency = childSnapshot.val().frequency;
+         let tArrival = moment().add(tMinutes, "m").format("hh:mm A");
+         let tMinutes = tFrequency - tRemainder;
+         let tRemainder = moment().diff(moment.unix(tFirstTrain), "minutes") % tFrequency ;  */
 
-    // If Firebase has a highPrice and highBidder stored, update our client-side variables
-    if (snapshot.child("trainName").exists() && snapshot.child("destination").exists() && snapshot.child("frequencyMins")) {
-      // Set the variables for highBidder/highPrice equal to the stored values.
-      trainName = snapshot.val().trainName;
-      destination = snapshot.val().destination;
-      frequencyMins = parseInt(snapshot.val().frequencyMins);
+         console.log(data);
+         console.log(data.name);
+    
+    if (snapshot.child("trainName").exists() && snapshot.child("destination").exists() && snapshot.child("frequency")) {
+
+      trainName = data.trainName;
+      destination = data.destination;
+      frequency = parseInt(data.frequency);
     }
   
-    // If Firebase does not have highPrice and highBidder values stored, they remain the same as the
-    // values we set when we initialized the variables.
-    // In either case, we want to log the values to console and display them on the page.
     console.log(trainName);
     console.log(destination);
-    console.log(frequencyMins);
+    console.log(frequency);
     $("#train-name").text(trainName);
     $("#destination").text(destination);
-    $("#frequency").text(frequencyMins); 
+    $("#frequency").text(frequency); 
     // If any errors are experienced, log them to console.
   }, function(errorObject) {
     console.log("The read failed: " + errorObject.code);
   });
 
   $("#train-btn").on("click", function(event) {
+    //stops it from refreshing
       event.preventDefault();
 
+      // Grabs user input
       var trainName = $("#train-name").val().trim();
-      console.log(trainName);
+      console.log("Train Name:" + trainName);
       var destination = $("#destination").val().trim();
-      console.log(destination);
-      var frequencyMins = $("#frequency").val().trim();
-      console.log(frequencyMins)
-      var nextArrival = $("#firstTrainTime").val().trim();
-      console.log(nextArrival);
-      var minutesAway = 0;//minutesCalculated; - Running of minutes calculated. Run the function outside of the on.click event, then insert it into here
-  });
+      console.log("Destination:", destination);
+      var firstTrainUnix = moment($("#first-train-time").val().trim(), "HH:mm").subtract(10, "years").format("X");
+      console.log("First Train Time (unix):", firstTrainUnix);
+      var frequency = $("#frequency").val().trim();
+      console.log("Frequency:", frequency);
 
- 
+        var newTrain = {
+        name:  trainName,
+        destination: destination,
+        firstTrain: firstTrainUnix,
+        frequency: frequency
+      }
+
+      trainData.push(newTrain);
+
+  });
+  
+
